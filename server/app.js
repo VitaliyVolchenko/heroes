@@ -6,6 +6,14 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
+mongoose.connect('mongodb://localhost:27017/heroes',{ useNewUrlParser: true })
+    .then(result => {
+    console.log('connected !!!');    
+    }).catch(err => {
+    console.log('EEERRR', err);
+    });
+mongoose.connection.once('open', () => console.log('Connected to MongoDB'));
+
 const heroesRoutes = require('./routes/heroes');
 
 const port = process.env.PORT || 5000;
